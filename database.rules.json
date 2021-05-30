@@ -1,0 +1,10 @@
+{
+  "rules": {
+    "players": {
+      "$player_id": {
+        ".read": false,
+        ".write": "$player_id === auth.uid"
+      }
+    }
+  }
+}
