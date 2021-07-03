@@ -5,7 +5,7 @@ import { AuthData } from "pusher-js/types/src/core/auth/options";
 let pusher: Pusher | undefined = undefined;
 
 export const getPusher = (): Pusher => {
-  const functions = getFunctions();
+  const functions = getFunctions(undefined, "europe-central2");
   const authorizePusher = httpsCallable(functions, "authorizePusher");
 
   if (pusher === undefined) {

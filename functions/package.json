@@ -1,10 +1,10 @@
 {
   "name": "functions",
   "scripts": {
-    "build": "tsc",
-    "serve": "npm run build && firebase emulators:start",
-    "shell": "npm run build && firebase functions:shell",
-    "start": "npm run shell",
+    "build": "tsc --project tsconfig.production.json",
+    "serve": "yarn build && firebase emulators:start",
+    "shell": "yarn build && firebase functions:shell",
+    "start": "yarn shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
@@ -13,14 +13,20 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@types/node-fetch": "^2.5.10",
+    "@google-cloud/pubsub": "^2.12.0",
     "firebase-admin": "^9.2.0",
     "firebase-functions": "^3.11.0",
     "pusher": "^5.0.0"
   },
   "devDependencies": {
-    "firebase-functions-test": "^0.2.0",
-    "typescript": "^3.8.0"
+    "@types/jest": "^26.0.23",
+    "@types/node-fetch": "^2.5.10",
+    "@types/uuid": "^8.3.0",
+    "firebase-functions-test": "^0.2.3",
+    "jest": "^27.0.3",
+    "ts-jest": "^27.0.2",
+    "typescript": "^4.3.2",
+    "uuid": "^8.3.2"
   },
   "private": true
 }

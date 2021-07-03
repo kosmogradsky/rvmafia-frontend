@@ -5,6 +5,7 @@ import { getFunctions, useFunctionsEmulator } from "firebase/functions";
 import { getFirestore, useFirestoreEmulator } from "firebase/firestore";
 import { getDatabase, useDatabaseEmulator } from "firebase/database";
 import { Main } from "./Main";
+import { io } from "socket.io-client";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCo6d0ATy9DnEim_CjTi8blo9KFx2G-Ag0",
@@ -18,20 +19,24 @@ const firebaseConfig = {
 };
 initializeApp(firebaseConfig);
 
-if (location.hostname === "localhost") {
-  const functions = getFunctions();
-  const firestore = getFirestore();
-  const database = getDatabase();
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useFunctionsEmulator(functions, "localhost", 5001);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useFirestoreEmulator(firestore, "localhost", 4200);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useDatabaseEmulator(database, "localhost", 9000);
-}
+// if (location.hostname === "localhost") {
+//   const functions = getFunctions();
+//   const firestore = getFirestore();
+//   const database = getDatabase();
+//   // eslint-disable-next-line react-hooks/rules-of-hooks
+//   useFunctionsEmulator(functions, "localhost", 5001);
+//   // eslint-disable-next-line react-hooks/rules-of-hooks
+//   useFirestoreEmulator(firestore, "localhost", 4200);
+//   // eslint-disable-next-line react-hooks/rules-of-hooks
+//   useDatabaseEmulator(database, "localhost", 9000);
+// }
 
 const root = document.createElement("div");
 
 render(<Main />, root);
 
 document.body.appendChild(root);
+
+(window as any).socket = io("ws://localhost:8000", {
+  transports: ["websocket"],
+});
